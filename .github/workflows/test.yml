@@ -20,6 +20,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           GITHUB_PULL_REQUEST_NUMBER=$(echo $GITHUB_HEAD_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
-          echo "DOMAIN_NAME=$(echo pr-$GITHUB_PULL_REQUEST_NUMBER)" >> $GITHUB_ENV
+          echo "DOMAIN_NAME=pr-$(echo $GITHUB_PULL_REQUEST_NUMBER)" >> $GITHUB_ENV
       - name: Debug
         run: echo ${{ env.DOMAIN_NAME }}
