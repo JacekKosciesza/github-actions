@@ -16,10 +16,12 @@ jobs:
         run: |
           GITHUB_BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})
           DOMAIN_NAME=$(echo $GITHUB_BRANCH_NAME)
+          echo $DOMAIN_NAME
       - name: Get pull request number
         if: github.event_name == 'pull_request'
         run: |
           GITHUB_PULL_REQUEST_NUMBER=$(echo $GITHUB_HEAD_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
           DOMAIN_NAME=$(echo pr-$GITHUB_PULL_REQUEST_NUMBER)
+          echo $DOMAIN_NAME
       - name: Debug
-        run: echo $DOMAIN_NAME
+        run: echo ${{ env.DOMAIN_NAME }}
