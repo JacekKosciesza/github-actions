@@ -11,7 +11,15 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - name: Names
+      - name: Get branch name
+        if: github.event_name == 'push'
         run: |
-          echo $GITHUB_REF
-          echo $GITHUB_HEAD_REF
+          GITHUB_BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})
+          DOMAIN_NAME=$(echo $GITHUB_BRANCH_NAME)
+      - name: Get pull request number
+        if: github.event_name == 'pull_request'
+        run: |
+          GITHUB_PULL_REQUEST_NUMBER=$(echo $GITHUB_HEAD_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          DOMAIN_NAME=$(echo pr-$GITHUB_PULL_REQUEST_NUMBER)
+      - name: Debug
+        run: echo $DOMAIN_NAME
