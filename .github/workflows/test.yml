@@ -22,4 +22,4 @@ jobs:
           GITHUB_PULL_REQUEST_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
           echo "DOMAIN_NAME=pr-$(echo $GITHUB_PULL_REQUEST_NUMBER)" >> $GITHUB_ENV
       - name: Debug
-        run: echo ${{ env.DOMAIN_NAME }}
+        run: echo ${{ env.DOMAIN_NAME }} 
