@@ -20,8 +20,11 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           GITHUB_PULL_REQUEST_NUMBER=$(echo $GITHUB_HEAD_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo "GITHUB_EVENT_PATH"
           echo $GITHUB_EVENT_PATH
+          echo "GITHUB_HEAD_REF"
           echo $GITHUB_HEAD_REF
+          echo "GITHUB_REF"
           echo $GITHUB_REF
           echo $GITHUB_HEAD_REF | awk 'BEGIN { FS = "/" } ; { print $3 }'
           echo $GITHUB_PULL_REQUEST_NUMBER
