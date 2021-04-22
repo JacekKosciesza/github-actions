@@ -16,14 +16,14 @@ jobs:
         run: |
           GITHUB_BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})
           echo "DOMAIN_NAME=$(echo $GITHUB_BRANCH_NAME)" >> $GITHUB_ENV
+          echo "AWS_AMPLIFY_JOB_COMMIT_ID=$(echo $GITHUB_SHA)" >> $GITHUB_ENV
       - name: Get pull request number
         if: github.event_name == 'pull_request'
         run: |
           GITHUB_PULL_REQUEST_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
           echo "DOMAIN_NAME=pr-$(echo $GITHUB_PULL_REQUEST_NUMBER)" >> $GITHUB_ENV
+          echo "AWS_AMPLIFY_JOB_COMMIT_ID=$(echo ${{github.event.pull_request.head.sha}})" >> $GITHUB_ENV
       - name: Debug
         run: |
           echo ${{ env.DOMAIN_NAME }}
-          AWS_AMPLIFY_JOB_COMMIT_ID=$GITHUB_SHA
-          echo $AWS_AMPLIFY_JOB_COMMIT_ID
-          echo ${{github.event.pull_request.head.sha}}
+          echo ${{ env.AWS_AMPLIFY_JOB_COMMIT_ID}}
