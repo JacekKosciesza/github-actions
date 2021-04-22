@@ -26,3 +26,4 @@ jobs:
           echo ${{ env.DOMAIN_NAME }}
           AWS_AMPLIFY_JOB_COMMIT_ID=$GITHUB_SHA
           echo $AWS_AMPLIFY_JOB_COMMIT_ID
+          echo ${{github.event.pull_request.head.sha}}
